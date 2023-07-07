@@ -19,6 +19,7 @@ function Navbar(props) {
   const inputHandler = (e)=>{
     if(e.keyCode === 13 ){
       const val = titleCase2(e.target.value)
+      e.target.value = '';
       url = `${url}${val}?perPage='100'`;
       props.setPageNumber(1);
       props.url(url);

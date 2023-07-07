@@ -4,8 +4,7 @@ import './logo.scss'
 function Logo() {
   return (
     <div className='logo'>
-      {/* Logo */}
-      <ReactSVG src='src/assets/ani.svg' className='logo-svg'/>
+      <ReactSVG src='public/ani.svg' className='logo-svg'/>
     </div>
   )
 }
