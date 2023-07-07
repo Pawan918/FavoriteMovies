@@ -1,0 +1,52 @@
+.pageNav {
+  padding-top: 40px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  background-color: black;
+  &-prev {
+    border: none;
+    letter-spacing: 3px;
+    background-color: rgb(24, 23, 23);
+    cursor: pointer;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    height: 40px;
+    svg {
+      font-size: 20px;
+    }
+  }
+  &-next {
+    border: none;
+    letter-spacing: 3px;
+    color: white;
+    cursor: pointer;
+    background-color: rgb(24, 23, 23);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    height: 40px;
+    svg {
+      font-size: 20px;
+    }
+  }
+  &-pagenumb {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 40px;
+    width: 150px;
+    &__para {
+      letter-spacing: 3px;
+      color: white;
+    }
+    &__input {
+      width: 40px;
+      height: 25px;
+    }
+  }
+}

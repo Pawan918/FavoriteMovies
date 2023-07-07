@@ -1,0 +1,85 @@
+.cardside{
+    font-size: 14px;
+    z-index: 999;
+    position: relative;
+
+    &-play{
+        position: absolute;
+        left: 30%;
+        top: -240px;
+        svg{
+            font-size:90px;
+        }
+    }
+    &-details{
+        padding: 0px 15px;
+        cursor: pointer;
+        border-radius: 5px;
+        background-color: black;
+        color: white;
+        width: 350px;
+        max-height: 500px;
+        border: whitesmoke 2px solid;
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        left: 102%;
+        top: -200px;
+        .info__para{
+            padding: 0px;
+            margin: 6px;
+            &-title{
+                color: rgb(128, 128, 128);
+                display: inline;
+            }
+        }
+        &__name{
+            display: flex;
+            font-size: 20px;
+            .name__para{
+                padding: 0;
+                margin: 8px;
+                margin-top: 25px;
+            }
+        }
+        &__desc{
+            margin:0px 15px;
+            color: rgb(128, 128, 128);
+        }
+        &__info{
+            display: flex;
+            flex-direction: column;
+            margin: 0px 15px;
+        }
+    }
+    &-footer{
+        display: flex;
+        height: 40px;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        &__play{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: white 2px solid;
+            width: 200px;
+        }
+        &__bookmark{
+            border: white 2px solid;
+            display: flex;
+            width: 50px;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+.right{
+    position: absolute;
+   left: 102%;
+ }
+ .left{
+    position: absolute;
+    left: -155%; 
+ }

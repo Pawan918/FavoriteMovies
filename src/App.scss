@@ -1,0 +1,43 @@
+:root{
+  --blue: #007bff;
+    --indigo: #6610f2;
+    --purple: #6f42c1;
+    --pink: #e3b5cd;
+    --red: #dc3545;
+    --orange: #fd9c46;
+    --yellow: #ffc107;
+    --green: #b0e3af;
+    --teal: #20c997;
+    --cyan: #17a2b8;
+    --white: #fff;
+    --gray: #6c6c6c;
+    --gray-dark: #343434;
+    --primary: #e50914;
+    --primary1: #f6212b;
+    --primary2: #be0711;
+    --secondary: #2d2d2d;
+    --secondary1: #464646;
+    --secondary2: #1b1b1b;
+    --text-major: #ededed;
+    --success: #b0e3af;
+    --info: #17a2b8;
+    --warning: #ffc107;
+    --danger: #dc3545;
+    --light: #ececec;
+    --dark: #343434;
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --breakpoint-xxl: 1400px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+// .app {
+//   /* background-color: red; */
+
+// }
