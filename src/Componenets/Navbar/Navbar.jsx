@@ -4,9 +4,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import { titleCase2 } from '../../utilities/titleCase';
 import { Link } from 'react-router-dom';
 // import Logo from "./../Logo/Logo";
-import Logo from './../../assets/ani.svg'
+import Logo from './../Logo/Logo'
 import { fetchData2 } from '../../utilities/fetchData';
-import { ReactSVG } from 'react-svg';
+
 
 function Navbar(props) {
 
@@ -57,7 +57,7 @@ function Navbar(props) {
     <>
     <div className="header">
       <div className='logo'>
-      <ReactSVG src='src/assets/ani.svg' className='logo-svg'/>
+        <Logo/>
       </div>
     <div className='navbar'>
       <ul className='navbar-item'>

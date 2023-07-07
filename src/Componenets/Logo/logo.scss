@@ -1,0 +1,20 @@
+.logo{
+    max-width: 100%;
+    // max-height: 40px;
+}
+.logo-svg{
+    max-height: 80%;
+    max-width: 100%;
+    display: flex;
+    align-items: flex-start;
+    overflow: hidden;
+    svg{
+        // width: 00px;
+        width: 250px;
+        height: 141px;
+        // // fill: #6d6d6d;
+        // height: 200px;
+        // // width: ;
+        background-color: #161616;
+    }
+}

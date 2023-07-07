@@ -1,9 +1,11 @@
 import React from 'react'
-
+import { ReactSVG } from 'react-svg';
+import './logo.scss'
 function Logo() {
   return (
     <div className='logo'>
-      Logo Card
+      {/* Logo */}
+      <ReactSVG src='src/assets/ani.svg' className='logo-svg'/>
     </div>
   )
 }
