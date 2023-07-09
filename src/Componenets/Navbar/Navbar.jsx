@@ -2,7 +2,6 @@ import React, { useReducer, useState } from 'react'
 import './navbar.scss'
 import SearchIcon from '@mui/icons-material/Search';
 import { titleCase2 } from '../../utilities/titleCase';
-import { Link } from 'react-router-dom';
 // import Logo from "./../Logo/Logo";
 import Logo from './../Logo/Logo'
 import { fetchData2 } from '../../utilities/fetchData';
