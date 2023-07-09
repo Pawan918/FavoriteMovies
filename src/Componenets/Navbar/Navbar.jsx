@@ -41,16 +41,19 @@ function Navbar(props) {
       props.url('https://api.enime.moe/popular');
       return {url : 'https://api.enime.moe/popular'}
     }
-    if(action.type === 'RANDOM'){
-      const fetchDatas = async()=>{
-        const res = await fetchData2('https://api.jikan.moe/v4/random/anime');
-        props.url(`https://api.enime.moe/mapping/mal/${res.data.mal_id}`)
-      }
-      fetchDatas();
-      // props.url('');
-      // return {url:'https://api.jikan.moe/v4/random/anime'}
+    // if(action.type === 'RANDOM'){
+    //   const fetchDatas = async()=>{
+    //     const res = await fetchData2('https://api.jikan.moe/v4/random/anime');
+    //     if()
+    //     const res2 = await fetchData2(`https://api.enime.moe/mapping/mal/${res.data.mal_id}`);
+    //     if(res2.statusCode === 404 && res2.format  != 'SPECIAL') fetchDatas();
+    //     props.url(`https://api.enime.moe/mapping/mal/${res.data.mal_id}`)
+    //   }
+    //   fetchDatas();
+    //   // props.url('');
+    //   // return {url:'https://api.jikan.moe/v4/random/anime'}
 
-    }
+    // }
 
   }
   const [state , dispatch]  = useReducer(reducer,defaultState)
