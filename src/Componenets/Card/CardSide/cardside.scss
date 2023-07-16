@@ -1,12 +1,12 @@
 .cardside{
-    font-size: 14px;
+    font-size: 12px;
     z-index: 999;
     position: relative;
 
     &-play{
         position: absolute;
-        left: 30%;
-        top: -240px;
+        left: 27%;
+        top: -300px;
         svg{
             font-size:90px;
         }
@@ -17,14 +17,15 @@
         border-radius: 5px;
         background-color: black;
         color: white;
-        width: 350px;
+        width: 275px;
         max-height: 500px;
         border: whitesmoke 2px solid;
         display: flex;
         flex-direction: column;
         position: absolute;
         left: 102%;
-        top: -200px;
+        top: -250px;
+        font-size: 10px;
         .info__para{
             padding: 0px;
             margin: 6px;
@@ -35,7 +36,7 @@
         }
         &__name{
             display: flex;
-            font-size: 20px;
+            font-size: 16px;
             .name__para{
                 padding: 0;
                 margin: 8px;
@@ -43,10 +44,12 @@
             }
         }
         &__desc{
+            font-size: 12px;
             margin:0px 15px;
             color: rgb(128, 128, 128);
         }
         &__info{
+            font-size: 10px;
             display: flex;
             flex-direction: column;
             margin: 0px 15px;
@@ -81,5 +84,5 @@
  }
  .left{
     position: absolute;
-    left: -155%; 
+    left: -164%; 
  }

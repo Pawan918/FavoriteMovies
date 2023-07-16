@@ -72,7 +72,7 @@ function App() {
         </Route>
         <Route exact path='/newest' element={<Newest/>}>
         </Route>
-        <Route exact path='/anime/:name' element={<Anime/>}>
+        <Route exact path='/anime/:name/:ep' element={<Anime/>}>
         </Route>
       </Routes>
     </div>
