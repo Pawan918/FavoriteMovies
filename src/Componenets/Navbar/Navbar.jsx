@@ -113,48 +113,6 @@ function Navbar(props) {
       setIsHidden(false)
     }
   }
-  const defaultState = {
-    url: ""
-  }
-  const reducer = (state, action) => {
-    if (action.type === "NEWEST") {
-      props.setPageNumber(1);
-      props.url('https://api.enime.moe/recent');
-      return { url: 'https://api.enime.moe/recent' };
-    }
-    if (action.type === "POPULAR") {
-
-      // console.log('popular')
-      props.setPageNumber(1);
-      props.url('https://api.enime.moe/popular');
-      return { url: 'https://api.enime.moe/popular' }
-    }
-    // if(action.type === 'RANDOM'){
-    //   const fetchDatas = async()=>{
-    //     const res = await fetchData2('https://api.jikan.moe/v4/random/anime');
-    //     if()
-    //     const res2 = await fetchData2(`https://api.enime.moe/mapping/mal/${res.data.mal_id}`);
-    //     if(res2.statusCode === 404 && res2.format  != 'SPECIAL') fetchDatas();
-    //     props.url(`https://api.enime.moe/mapping/mal/${res.data.mal_id}`)
-    //   }
-    //   fetchDatas();
-    //   // props.url('');
-    //   // return {url:'https://api.jikan.moe/v4/random/anime'}
-
-    // }
-    // if(action.type === "UPCOMING"){
-    //   props.setPageNumber(1);
-    //   console.log('upcoming');
-    //   const fetchDatas = async ()=>{
-    //     const res = await fetchData2('https://api.jikan.moe/v4/seasons/upcoming');
-    //     console.log(res);
-    //   }
-    //   fetchDatas()
-    //   // props.url('https://api.jikan.moe/v4/seasons/upcoming');
-    //   return {url:'https://api.jikan.moe/v4/seasons/upcoming'}
-    // }
-  }
-  const [state, dispatch] = useReducer(reducer, defaultState)
   return (
     <>
       <div className="header">
@@ -187,8 +145,12 @@ function Navbar(props) {
                 <ul className='navbar-item'>
                   <li className="navbar-items"><a href="#" onClick={() => dispatch({ type: "GENRE" })}>GENRE</a></li>
                   <li className="navbar-items"><a href="#">UPDATED</a></li>
-                  <li className="navbar-items"><a href="#" onClick={() => dispatch({ type: "POPULAR" })} >POPULAR</a></li>
-                  <li className="navbar-items"><a href="#" onClick={() => dispatch({ type: "NEWEST" })} >NEWEST</a></li>
+                  <Link to='/popular' className='navbar-items'>
+                    POPULAR
+                  </Link>
+                  <Link to='/newest' className='navbar-items'>
+                    NEWEST
+                  </Link>
                   {
                     !isHidden ? (
                       <>

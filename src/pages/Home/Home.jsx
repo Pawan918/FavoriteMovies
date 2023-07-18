@@ -60,7 +60,7 @@ function Home() {
   return (
     //  header of the app
     <div className='home'>
-      <Navbar url={urlHandler} setPageNumber={setPageNumber}/>
+      <Navbar />
 
      {/* cards of the app  */}
      <div className="filter">
