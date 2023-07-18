@@ -5,6 +5,7 @@ import PageNav from "../../Componenets/PageNav/PageNav";
 import { fetchData } from '../../utilities/fetchData';
 import './home.scss'
 import { useEffect, useState } from "react";
+import Filter from '../../Componenets/Filter/Filter';
 
 function Home() {
 
@@ -39,12 +40,20 @@ function Home() {
   }
   // to fetch data on pageNumber and url change
   useEffect(() => {
+    let isCancelled = false;
     const getData = async ()=>{
-
       const res = await fetchData(url,pageNumber);
-      setData(res);
+      if(!isCancelled){
+        setData(res);
+      }
     }
-    getData();
+    if(!isCancelled){
+
+      getData();
+    }
+    return()=>{
+      isCancelled = true;
+    }
     // console.log(pageNumber);
   }, [pageNumber, url]);
   console.log(data);
@@ -54,6 +63,9 @@ function Home() {
       <Navbar url={urlHandler} setPageNumber={setPageNumber}/>
 
      {/* cards of the app  */}
+     <div className="filter">
+      <Filter/>
+     </div>
       <div className="cards">
 
         {/* to map the card based on the data  */}

@@ -18,7 +18,7 @@ function Anime() {
   // to get the video data of the anime
   const [data2, setData2] = useState([]);
   // to set the currentEpisode of the data
-  const [data3,setData3] = useState([]);
+  const [data3, setData3] = useState([]);
   const [episode, setEpisode] = useState(params.ep);
 
   // to set the url of the data
@@ -31,44 +31,45 @@ function Anime() {
   const [episodeLength, setEpisodeLength] = useState(-1)
 
   // to change the dropdown value 
-  const [dropdownValue,setDropdownValue] = useState("");
+  const [dropdownValue, setDropdownValue] = useState("");
 
-  const [currentProps,setCurrentProps] = useState(window.location.href)
-  // componentDidMount(){
-  //   if(currentProps != window.location.href){
-  //     setCurrentProps(window.location.href)
-  //   }
-  // }
   useEffect(() => {
-
+    let isCancelled = false;
     const getData = async () => {
-      const res = await fetchData2(url);
-      setData(res);
-      setEpisode(res.number);
+      if (!isCancelled) {
+        const res = await fetchData2(url);
+        setData(res);
+        setEpisode(res.number);
 
-      // init of the episode limit
-      setEpisodeLimit(Math.floor(res.number / 100) * 100 + 1)
+        // init of the episode limit
+        setEpisodeLimit(Math.floor(res.number / 100) * 100 + 1)
 
-      // init of the episode length
-      setEpisodeLength(Math.floor(res?.anime?.episodes.length / 100));
-      setDropdownValue(`${Math.floor(res?.number/100)*100}`);
-      if (res) {
-        const res2 = await fetchData2(`https://api.enime.moe/source/${res?.sources?.[0].id}`)
-        setData2(res2);
+        // init of the episode length
+        setEpisodeLength(Math.floor(res?.anime?.episodes.length / 100));
+        setDropdownValue(`${Math.floor(res?.number / 100) * 100}`);
+        if (res) {
+          const res2 = await fetchData2(`https://api.enime.moe/source/${res?.sources?.[0].id}`)
 
-        // console.log(episodeLength)
+          setData2(res2);
+          // console.log(episodeLength)
+        }
+        const res3 = await fetchData2(`https://api.enime.moe/anime/${params.name}`)
+        setData3(res3);
       }
-      const res3 = await fetchData2(`https://api.enime.moe/anime/${params.name}`)
-      setData3(res3);
     }
-    setTimeout(()=>{
-      console.log('hello')
+    setTimeout(() => {
+      if (!isCancelled)
+        console.log('hello')
       getData()
-    },2000);
+    }, 2000);
+    return () => {
+      isCancelled = true;
+    }
   }, [url])
+  console.log(data)
   // btn to handle when episode is changed
   const btnHandler = (res) => {
-      setUrl(`https://api.enime.moe/view/${res.animeId}/${res.number}`)
+    setUrl(`https://api.enime.moe/view/${res.animeId}/${res.number}`)
   }
 
   // to handle the dropdown 
@@ -110,10 +111,10 @@ function Anime() {
                     data?.anime?.episodes.map((data, i) => {
                       return (i > (parseInt(episodeLimit - 2)) && i < (parseInt(episodeLimit) + 100) && (
                         <Link to={`/anime/${params.name}/${data.number}`} key={data.id}>
-                        <button res={data} key={data.id}
-                          onClick={() => { btnHandler(data) }}
-                          className={`btn ${episode == i + 1 ? ' active' : ''}`}>{i + 1}
-                        </button>
+                          <button res={data} key={data.id}
+                            onClick={() => { btnHandler(data) }}
+                            className={`btn ${episode == i + 1 ? ' active' : ''}`}>{i + 1}
+                          </button>
                         </Link>
                       ))
                     })

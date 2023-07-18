@@ -5,7 +5,7 @@ import Home from "./pages/Home/Home";
 import Popular from "./pages/Popular/Popular";
 import Newest from "./pages/Newest/Newest";
 import Anime from "./pages/Anime/Anime";
-
+import Upcoming from "./pages/Upcoming/Upcoming";
 import { BrowserRouter as Router, Route, Routes, BrowserRouter } from 'react-router-dom'
 
 import "./App.scss";
@@ -74,6 +74,7 @@ function App() {
         </Route>
         <Route exact path='/anime/:name/:ep' element={<Anime/>}>
         </Route>
+        <Route exact path = '/upcoming' element={<Upcoming/>}></Route>
       </Routes>
     </div>
     </BrowserRouter>

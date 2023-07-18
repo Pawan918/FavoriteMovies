@@ -1,4 +1,4 @@
-import React, { useReducer, useState,useRef } from 'react'
+import React, { useReducer, useState, useRef } from 'react'
 import './navbar.scss'
 // import SearchIcon from '@mui/icons-material/Search';
 import { titleCase2 } from '../../utilities/titleCase';
@@ -17,6 +17,7 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 
 import IconButton from "@mui/material/IconButton";
+import { Link } from 'react-router-dom';
 
 const navItems = [
   "GENRES",
@@ -89,15 +90,15 @@ function Navbar(props) {
 
     setIsHidden(!isHidden);
     // to give automatic focus on clicking the search bar
-    setTimeout(()=>{
-      if(inputRef.current != null){
+    setTimeout(() => {
+      if (inputRef.current != null) {
         inputRef.current.getElementsByTagName('input')[0].focus();
       }
-    },10)
+    }, 10)
   }
 
   // to hide the search bar when search input is out of focus
-  const handleBlur = ()=>{
+  const handleBlur = () => {
     setIsHidden(false);
   }
 
@@ -141,7 +142,17 @@ function Navbar(props) {
     //   // return {url:'https://api.jikan.moe/v4/random/anime'}
 
     // }
-
+    // if(action.type === "UPCOMING"){
+    //   props.setPageNumber(1);
+    //   console.log('upcoming');
+    //   const fetchDatas = async ()=>{
+    //     const res = await fetchData2('https://api.jikan.moe/v4/seasons/upcoming');
+    //     console.log(res);
+    //   }
+    //   fetchDatas()
+    //   // props.url('https://api.jikan.moe/v4/seasons/upcoming');
+    //   return {url:'https://api.jikan.moe/v4/seasons/upcoming'}
+    // }
   }
   const [state, dispatch] = useReducer(reducer, defaultState)
   return (
@@ -181,7 +192,9 @@ function Navbar(props) {
                   {
                     !isHidden ? (
                       <>
-                        <li className="navbar-items"><a href="#">UPCOMING</a></li>
+                        <Link to='/upcoming' className='navbar-items'>
+                          UPCOMING
+                        </Link>
                         <li className="navbar-items"><a href="#" onClick={() => dispatch({ type: "RANDOM" })}>RANDOM</a></li>
                       </>
                     ) : (
@@ -192,7 +205,7 @@ function Navbar(props) {
                         <StyledInputBase
                           placeholder="Search…"
                           inputProps={{ 'aria-label': 'search' }}
-                          ref = {inputRef}
+                          ref={inputRef}
                           onBlur={handleBlur}
                           onKeyDown={inputHandler}
                         />
@@ -200,14 +213,14 @@ function Navbar(props) {
                     )
                   }
                 </ul>
-              {
-                !isHidden && (
+                {
+                  !isHidden && (
 
-              <IconButton size="large" aria-label="search" color="inherit" onClick={searchHandler}>
-                <SearchIcon />
-              </IconButton>
-                )
-              }
+                    <IconButton size="large" aria-label="search" color="inherit" onClick={searchHandler}>
+                      <SearchIcon />
+                    </IconButton>
+                  )
+                }
               </Box>
             </Toolbar>
           </AppBar>
