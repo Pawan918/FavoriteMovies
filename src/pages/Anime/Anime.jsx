@@ -39,7 +39,7 @@ function Anime() {
       if (!isCancelled) {
         const res = await fetchData2(url);
         setData(res);
-        setEpisode(res.number);
+        setEpisode(res?.number);
 
         // init of the episode limit
         setEpisodeLimit(Math.floor(res.number / 100) * 100 + 1)
@@ -47,9 +47,9 @@ function Anime() {
         // init of the episode length
         setEpisodeLength(Math.floor(res?.anime?.episodes.length / 100));
         setDropdownValue(`${Math.floor(res?.number / 100) * 100}`);
+        console.log(res);
         if (res) {
           const res2 = await fetchData2(`https://api.enime.moe/source/${res?.sources?.[0].id}`)
-
           setData2(res2);
           // console.log(episodeLength)
         }

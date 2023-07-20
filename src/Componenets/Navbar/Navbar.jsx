@@ -143,7 +143,7 @@ function Navbar(props) {
               </Button>
             ))} */}
                 <ul className='navbar-item'>
-                  <li className="navbar-items"><a href="#" onClick={() => dispatch({ type: "GENRE" })}>GENRE</a></li>
+                  <Link to='/' className='navbar-items'>GENRE</Link>
                   <li className="navbar-items"><a href="#">UPDATED</a></li>
                   <Link to='/popular' className='navbar-items'>
                     POPULAR
@@ -157,7 +157,7 @@ function Navbar(props) {
                         <Link to='/upcoming' className='navbar-items'>
                           UPCOMING
                         </Link>
-                        <li className="navbar-items"><a href="#" onClick={() => dispatch({ type: "RANDOM" })}>RANDOM</a></li>
+                        <Link to='/' className='navbar-items'>RANDOM</Link>
                       </>
                     ) : (
                       <Search >
@@ -197,12 +197,24 @@ function Navbar(props) {
                 'aria-labelledby': 'basic-button',
               }}
             >
-              <MenuItem onClick={handleClose}>GENRES</MenuItem>
-              <MenuItem onClick={handleClose}>TYPES</MenuItem>
-              <MenuItem onClick={handleClose}>UPDATED</MenuItem>
-              <MenuItem onClick={handleClose}>ADDED</MenuItem>
-              <MenuItem onClick={handleClose}>ONGOING</MenuItem>
-              <MenuItem onClick={handleClose}>UPCOMING</MenuItem>
+              <MenuItem onClick={handleClose}>
+                <Link to='/' className='navbar-items'>GENRE</Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <Link to='/' className='navbar-items'>UPDATED</Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <Link to='/popular' className='navbar-items'>POPULAR</Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <Link to='/newest' className='navbar-items'>NEWEST</Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <Link to='/upcoming' className='navbar-items'>UPCOMING</Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <Link to='/' className='navbar-items'>RANDOM</Link>
+              </MenuItem>
             </Menu>
           </Box>
           {/* </Box> */}

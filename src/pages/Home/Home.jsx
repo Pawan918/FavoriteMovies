@@ -6,6 +6,7 @@ import { fetchData } from '../../utilities/fetchData';
 import './home.scss'
 import { useEffect, useState } from "react";
 import Filter from '../../Componenets/Filter/Filter';
+import Banner from '../../Componenets/Banner/Banner';
 
 function Home() {
 
@@ -60,14 +61,13 @@ function Home() {
   return (
     //  header of the app
     <div className='home'>
-      <Navbar />
-
+      <Navbar url={urlHandler} setPageNumber={setPageNumber}/>
      {/* cards of the app  */}
-     <div className="filter">
+     <Banner/>
+     {/* <div className="filter">
       <Filter/>
-     </div>
+     </div> */}
       <div className="cards">
-
         {/* to map the card based on the data  */}
         {
           data.data != undefined ? (
