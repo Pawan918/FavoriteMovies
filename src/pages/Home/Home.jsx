@@ -17,31 +17,10 @@ function Home() {
   // to set the page number on clicking the pageNav
   const [pageNumber, setPageNumber] = useState(1);
 
-  // to change the url according to the user
-  const [url, setUrl] = useState('https://api.enime.moe/recent');
+  const url = 'https://api.enime.moe/recent';
 
-  // const [search,setSearch] = useState('');
-  // to move to the prevPage
-  const prevPage = () => {
-    if (pageNumber === 1) return;
-    setPageNumber(pageNumber - 1);
-    console.log(pageNumber);
-  };
 
-  // to move to the NextPage
-  const nextPage = () => {
-    setPageNumber(pageNumber + 1);
-  };
-
-  // to move to any page number
-  const skipPage = (val) => {
-    if (val !== NaN) setPageNumber(val);
-  };
-
-  const urlHandler = (url) => {
-    if (url !== '') setUrl(url)
-  }
-  // to fetch data on pageNumber and url change
+  // to fetch data on pageNumber change
   useEffect(() => {
     let isCancelled = false;
     setLoading(true);
@@ -64,12 +43,12 @@ function Home() {
         isCancelled = true;
       }
       // console.log(pageNumber);
-    }, [pageNumber, url]);
+    }, [pageNumber]);
   console.log(data);
   return (
     //  header of the app
     <div className='home'>
-      <Navbar setPageNumber={setPageNumber} />
+      <Navbar />
       <Banner />
       {/* cards of the app  */}
       {
@@ -90,7 +69,7 @@ function Home() {
               }
             </div>
             <div>
-              <PageNav page={{ prevPage, nextPage, skipPage, pageNumber }} />
+              <PageNav setPageNumber={setPageNumber} pageNumber={pageNumber} />
             </div>
           </>
         )

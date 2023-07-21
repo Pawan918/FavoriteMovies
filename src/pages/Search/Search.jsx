@@ -13,23 +13,7 @@ function Search() {
     const params = useParams();
     console.log(params)
     // console.log(params)
-    const url = `https://api.enime.moe/search/${params.name}`
-    const prevPage = () => {
-        if (pageNumber === 1) return;
-        setPageNumber(pageNumber - 1);
-        console.log(pageNumber);
-      };
-    
-      // to move to the NextPage
-      const nextPage = () => {
-        setPageNumber(pageNumber + 1);
-      };
-    
-      // to move to any page number
-      const skipPage = (val) => {
-        if (val !== NaN) setPageNumber(val);
-      };
-    
+    const url = `https://api.enime.moe/search/${params.name}` 
     useEffect(() => {
         let isCancelled = false;
         setLoading(true);
@@ -65,7 +49,7 @@ function Search() {
                             }
                         </div>
                         <div>
-                            <PageNav page={{ prevPage, nextPage, skipPage, pageNumber }} />
+                            <PageNav setPageNumber={setPageNumber} pageNumber={pageNumber} />
                         </div>
                     </>
                 )
