@@ -9,6 +9,7 @@ import Upcoming from "./pages/Upcoming/Upcoming";
 import { BrowserRouter as Router, Route, Routes, BrowserRouter } from 'react-router-dom'
 
 import "./App.scss";
+import Search from "./pages/Search/Search";
 function App() {
   // to set the data
   // const [data, setData] = useState([]);
@@ -75,6 +76,7 @@ function App() {
         <Route exact path='/anime/:name/:ep' element={<Anime/>}>
         </Route>
         <Route exact path = '/upcoming' element={<Upcoming/>}></Route>
+        <Route exact path="/:name" element={<Search/>}></Route>
       </Routes>
     </div>
     </BrowserRouter>

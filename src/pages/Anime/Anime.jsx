@@ -10,6 +10,7 @@ import { titleCase } from '../../utilities/titleCase'
 import { truncateString } from '../../utilities/truncate'
 import HoverRating from '../../utilities/HoverRating'
 import { Link } from 'react-router-dom'
+import Loader from '../../Componenets/Loader/Loader'
 function Anime() {
 
   const params = useParams();
@@ -20,6 +21,8 @@ function Anime() {
   // to set the currentEpisode of the data
   const [data3, setData3] = useState([]);
   const [episode, setEpisode] = useState(params.ep);
+
+  const [loading, setLoading] = useState(false);
 
   // to set the url of the data
   const [url, setUrl] = useState(`https://api.enime.moe/view/${params.name}/${episode}`);
@@ -35,19 +38,21 @@ function Anime() {
 
   useEffect(() => {
     let isCancelled = false;
+    setLoading(true);
     const getData = async () => {
       if (!isCancelled) {
-        const res = await fetchData2(url);
-        setData(res);
-        setEpisode(res?.number);
-
-        // init of the episode limit
-        setEpisodeLimit(Math.floor(res.number / 100) * 100 + 1)
-
-        // init of the episode length
-        setEpisodeLength(Math.floor(res?.anime?.episodes.length / 100));
-        setDropdownValue(`${Math.floor(res?.number / 100) * 100}`);
-        console.log(res);
+        const res = await fetchData2(url)
+          setLoading(false)
+          setData(res);
+          setEpisode(res?.number);
+  
+          // init of the episode limit
+          setEpisodeLimit(Math.floor(res.number / 100) * 100 + 1)
+  
+          // init of the episode length
+          setEpisodeLength(Math.floor(res?.anime?.episodes.length / 100));
+          setDropdownValue(`${Math.floor(res?.number / 100) * 100}`);
+          console.log(res);
         if (res) {
           const res2 = await fetchData2(`https://api.enime.moe/source/${res?.sources?.[0].id}`)
           setData2(res2);
@@ -80,7 +85,10 @@ function Anime() {
   return (
     <div className="">
       <Navbar />
-      <div className='anime'>
+      {
+        loading ? (<Loader/>):(
+
+          <div className='anime'>
         <div className='main'>
           {(data != undefined) ? (<>
             <div className="main-video">
@@ -118,8 +126,8 @@ function Anime() {
                         </Link>
                       ))
                     })
-                  ) : (
-                    <h1>Hello</h1>
+                    ) : (
+                      <h1>Hello</h1>
                   )
                 }
               </div>
@@ -185,6 +193,8 @@ function Anime() {
           <Aside />
         </div>
       </div>
+    )
+  }
     </div>
   )
 }

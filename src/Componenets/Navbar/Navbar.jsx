@@ -17,7 +17,8 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 
 import IconButton from "@mui/material/IconButton";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 const navItems = [
   "GENRES",
@@ -32,6 +33,7 @@ const navItems = [
 function Navbar(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const navigate = useNavigate();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -80,10 +82,7 @@ function Navbar(props) {
   }));
 
 
-
-
   const [isHidden, setIsHidden] = useState(false);
-  let url = `https://api.enime.moe/search/`;
 
   // to handle when search icon is clicked
   const searchHandler = () => {
@@ -101,16 +100,13 @@ function Navbar(props) {
   const handleBlur = () => {
     setIsHidden(false);
   }
-
   // to handle the input in search bar
   const inputHandler = (e) => {
     if (e.keyCode === 13) {
       const val = titleCase2(e.target.value)
+      navigate(`/${val}`)
       e.target.value = '';
-      url = `${url}${val}?perPage='100'`;
-      props.setPageNumber(1);
-      props.url(url);
-      setIsHidden(false)
+      setIsHidden(true);
     }
   }
   return (
@@ -217,37 +213,6 @@ function Navbar(props) {
               </MenuItem>
             </Menu>
           </Box>
-          {/* </Box> */}
-          {/* </> */}
-          {/* <ul className='navbar-item'>
-        <li className="navbar-items"><a href="#" onClick={()=>dispatch({type:"GENRE"})}>GENRE</a></li>
-        <li className="navbar-items"><a href="#">UPDATED</a></li>
-        <li className="navbar-items"><a href="#"  onClick={()=>dispatch({type:"POPULAR"})} >POPULAR</a></li>
-        <li className="navbar-items"><a href="#"  onClick={()=>dispatch({type:"NEWEST"})} >NEWEST</a></li>
-        {
-          !isHidden && (
-            <>
-            <li className="navbar-items"><a href="#">UPCOMING</a></li>
-            <li className="navbar-items"><a href="#" onClick={()=>dispatch({type:"RANDOM"})}>RANDOM</a></li>
-            </>
-          )
-        }
-       </ul>  */}
-          {/* <Drawer/> */}
-          {/* <div className="navbar-search">
-
-        {
-          isHidden && (
-            <div className="navbar-search__input">
-              <input type="text" className='navbar-search__input_text' placeholder='Search'  onKeyDown={inputHandler}/>
-            </div>
-          )
-        }
-            <div className="navbar-search__icon" onClick={searchHandler}>
-              <SearchIcon />
-            </div>
-            
-      </div> */}
         </div>
       </div>
       <hr></hr>
