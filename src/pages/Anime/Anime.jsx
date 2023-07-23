@@ -175,7 +175,7 @@ function Anime() {
                       <p className='country-para'>Country : </p>{data3?.countryOfOrigin || '?'}
                     </div>
                     <div className="genre">
-                      <p className='genre-para'>Genre : </p>{data3?.genre?.map((gen) => gen + ", ")}
+                      <p className='genre-para'>Genre : </p> {data3?.genre?.map((gen) => gen + ", ")}
                     </div>
                   </div>
                 </div>
