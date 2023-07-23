@@ -56,7 +56,7 @@ function Home() {
           <Loader />
         ) : (
           <>
-          <Filter/>
+          {/* <Filter/> */}
             <div className="cards">
               {/* to map the card based on the data  */}
               {
