@@ -1,7 +1,7 @@
 export const fetchData = async (url, pageNumber) => {
     let res = {};
     try {
-        console.log(`${url}?page=${pageNumber}`)
+        // console.log(`${url}?page=${pageNumber}`)
         const response = await fetch(
             `${url}?page=${pageNumber}`,
             {
@@ -10,7 +10,7 @@ export const fetchData = async (url, pageNumber) => {
         );
          res = await response.json();
         // setData(res);
-        console.log(res);
+        // console.log(res);
     } catch (err) {
         console.log(err);
     }

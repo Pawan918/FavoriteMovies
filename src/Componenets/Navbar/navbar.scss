@@ -1,10 +1,4 @@
 .header {
-    // flex-direction: column;
-    // color: var(--text-major);
-    // display: flex;
-    // justify-content: space-around;
-    // align-items: center;
-
     .logo {
         flex-grow: 1;
     }
@@ -17,7 +11,7 @@
 
         &-item {
             display: flex;
-            gap: 0px 15px;
+            gap: 0px 5px;
             margin: 0;
             text-decoration: none;
             // a{
@@ -26,16 +20,68 @@
         }
 
         &-items {
-
+            position: relative;
             display: flex;
-            padding: 2px 10px;
+            padding: 10px 10px;
             justify-content: center;
             align-items: center;
-            color: white;
+            color: #F1E4E4;
             text-decoration: none;
+            cursor: pointer;
             a {
                 color: white;
                 text-decoration: none;
+            }
+            &:hover{
+                color: white;
+            }
+            &::before{
+                content: '';
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: red;
+                width: 0;
+                height: .8px;
+                position: absolute;
+                bottom: 8px;
+                left: auto;
+            }
+            &:hover {
+                &::before{
+                    width: 80%;
+                    transition: width .3s ease,color .3s ease;
+                }
+            }
+            .type-sub{
+                position: absolute;
+                top: 38px;
+                display:flex;
+                max-height: 300px;
+                flex-wrap: wrap;
+                flex-direction: column;
+                background-color: #292929;
+                padding: 10px 20px;
+                text-decoration: none;
+                left: 10px;
+                list-style: none;
+                font-size: 14px;
+                line-height: 1.8;
+               
+                &--items{
+                    display: flex;
+                    align-items: center;
+                    margin: 1px;
+                    border-radius: 5px;
+                    padding: 5px 10px;
+                    // padding: ;
+                    &:hover{
+                        background-color: red;
+                    }
+                }
+            }
+            .genre{
+                min-width: 300px
             }
         }
 
@@ -87,5 +133,17 @@ hr{
     background: #6d6d6d;
 }
 
-
+.login{
+    margin-left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    column-gap: 10px;
+    cursor: pointer;
+    color: #F1E4E4;
+    &:hover{
+        color: #fff;
+    }
+}
 

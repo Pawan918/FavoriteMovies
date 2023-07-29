@@ -1,0 +1,17 @@
+.filter{
+    margin-top: 40px;
+    margin-left: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,170px);
+    grid-gap: 10px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.css-b62m3t-container{
+    z-index: 100;
+}
+.submit{
+    height: 38px;
+    width: 80px;
+    border-radius: 4px;
+}

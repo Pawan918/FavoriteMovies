@@ -13,10 +13,11 @@ function Upcoming() {
         let isCanclled = false;
         const getData = async () => {
             const res = await fetchData2('https://api.jikan.moe/v4/seasons/upcoming?limit=20');
-            // console.log(res)
             if (!isCanclled) {
                 res?.data?.map(async (data1) => {
                     const data2 = await fetchData2(`https://api.enime.moe/mapping/mal/${data1.mal_id}`).then((res) => {
+                        // const newData = {...res,newtrailer:data1.trailer};
+                        // console.log(newData)
                         setLoading(false);
                         setData((prevState) => {
                             return [...prevState, res]
@@ -32,12 +33,7 @@ function Upcoming() {
             isCanclled = true
         }
     }, [])
-    console.log(data)
-    // console.log(data1)
-    // const handleData = ()=>{
-    //     console.log(data)
-    // }
-    // console.log(data)
+
     return (
         <div>
             <Navbar />
@@ -50,7 +46,7 @@ function Upcoming() {
                             {
                                 data != undefined ? (
                                     data.map((res) => {
-                                        console.log('render')
+                                        // console.log('render')
                                         return res?.statusCode != 404 && (
                                             <Card res={res} key={res.id} />
                                         )

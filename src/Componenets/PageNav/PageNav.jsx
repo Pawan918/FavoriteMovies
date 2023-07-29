@@ -22,7 +22,8 @@ function PageNav(props) {
   
     // to move to any page number
     const skipPage = (val) => {
-      if (val !== NaN) setPageNumber(val);
+      if (val !== NaN) props.setPageNumber(val);
+      console.log(val)
     };
 
   const pageHandler = (e) => {

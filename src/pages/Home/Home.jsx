@@ -5,7 +5,7 @@ import PageNav from "../../Componenets/PageNav/PageNav";
 import { fetchData } from '../../utilities/fetchData';
 import './home.scss'
 import { useEffect, useState } from "react";
-import Filter from '../../Componenets/Filter/Filter';
+import Filter from '../../Componenets/FilterNav/Filter';
 import Banner from '../../Componenets/Banner/Banner';
 import Loader from '../../Componenets/Loader/Loader';
 
@@ -28,35 +28,36 @@ function Home() {
       const res = await fetchData(url, pageNumber).then((res) => {
         setLoading(false);
         setData(res);
-      });}
-      //   if (!isCancelled && res) {
-      //     setLoading(false)
-      //     setData(res);
-      //   }
-      // }
-      // setTimeout(() => {
-      //   setLoading(false);
-      getData();
-      // }, 2000)
+      });
+    }
+    //   if (!isCancelled && res) {
+    //     setLoading(false)
+    //     setData(res);
+    //   }
+    // }
+    // setTimeout(() => {
+    //   setLoading(false);
+    getData();
+    // }, 2000)
 
-      return () => {
-        isCancelled = true;
-      }
-      // console.log(pageNumber);
-    }, [pageNumber]);
+    return () => {
+      isCancelled = true;
+    }
+    // console.log(pageNumber);
+  }, [pageNumber]);
   console.log(data);
   return (
     //  header of the app
     <div className='home'>
       <Navbar />
-      <Banner />
       {/* cards of the app  */}
       {
         loading ? (
           <Loader />
         ) : (
           <>
-          {/* <Filter/> */}
+            <Banner />
+            <Filter />
             <div className="cards">
               {/* to map the card based on the data  */}
               {
