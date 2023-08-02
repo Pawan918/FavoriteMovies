@@ -61,7 +61,7 @@ function Filter() {
     if(rating != ''){
       string += `&rating=${rating}`
     }
-    if(genreSelected != undefined){
+    if(genreSelected != undefined && genreSelected != ''){
       let strings = '';
       const genre = genreSelected.map((data,index)=>{
         if(index == genreSelected.length-1){
@@ -71,6 +71,7 @@ function Filter() {
         }
       // console.log(data.value + " " + index);
       })
+      if(genreSelected.length)
       string += `&genres=${strings}`
     }
     setType('');

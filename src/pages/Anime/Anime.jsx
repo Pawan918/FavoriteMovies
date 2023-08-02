@@ -12,8 +12,8 @@ import HoverRating from '../../utilities/HoverRating'
 import { Link } from 'react-router-dom'
 import Loader from '../../Componenets/Loader/Loader'
 function Anime() {
-
   const params = useParams();
+  const [hasError,setHasError] = useState(false);
   // to get the data of the anime
   const [data, setData] = useState([]);
   // to get the video data of the anime

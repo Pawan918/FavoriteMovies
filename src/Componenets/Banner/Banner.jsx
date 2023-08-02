@@ -25,20 +25,20 @@ function Banner() {
     console.log(data.slug)
     navigate(`/anime/${data?.slug}/1`);
   }
+  const isCancelled = useRef(false);
   useEffect(() => {
-    let isCancelled = false;
     const getData = async () => {
-      if (!isCancelled) {
         await fetchData2(`https://api.jikan.moe/v4/seasons/now?limit=10`).then((res)=>{
           setLoading(false);
           setData(res.data);
         });
-      }
     }
-    getData();
+    if(!isCancelled.current){
+      getData();
+    }
     // console.log('hello')
     return () => {
-      isCancelled = true;
+      isCancelled.current = true;
     }
   }, [])
   //   console.log(data)
@@ -47,7 +47,7 @@ function Banner() {
     timeoutRef.current = setTimeout(
       () =>
         setIndex((prevIndex) =>
-          prevIndex === data.length - 1 ? 0 : prevIndex + 1
+          prevIndex === data?.length - 1 ? 0 : prevIndex + 1
         ),
       delay
     );

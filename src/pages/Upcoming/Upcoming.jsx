@@ -18,7 +18,7 @@ function Upcoming() {
                     const data2 = await fetchData2(`https://api.enime.moe/mapping/mal/${data1.mal_id}`).then((res) => {
                         // const newData = {...res,newtrailer:data1.trailer};
                         // console.log(newData)
-                        setLoading(false);
+                        setLoading(true);
                         setData((prevState) => {
                             return [...prevState, res]
                         })
@@ -33,7 +33,6 @@ function Upcoming() {
             isCanclled = true
         }
     }, [])
-
     return (
         <div>
             <Navbar />

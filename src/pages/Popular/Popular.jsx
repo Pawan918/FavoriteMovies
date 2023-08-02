@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Navbar from '../../Componenets/Navbar/Navbar'
 import { fetchData } from '../../utilities/fetchData';
 import Card from '../../Componenets/Card/Card';
@@ -10,20 +10,21 @@ function Popular() {
   const [loading, setLoading] = useState(false);
   const url = 'https://api.enime.moe/popular';
 
+  const isCancelled = useRef(false);
   useEffect(() => {
     setLoading(true);
-    let isCancelled = false;
     const getData = async () => {
       await fetchData(url, pageNumber).then((res) => {
         setLoading(false);
         setData(res);
+        console.log('popular render')
       });
     }
-    if (!isCancelled) {
+    if (!isCancelled.current) {
       getData();
     }
     return () => {
-      isCancelled = true;
+      isCancelled.current = true;
     }
     // console.log(pageNumber);
   }, [pageNumber, url]);

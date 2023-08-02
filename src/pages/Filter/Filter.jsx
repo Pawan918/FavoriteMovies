@@ -9,8 +9,7 @@ import PageNav from '../../Componenets/PageNav/PageNav';
 function Filter() {
   let queryParams = useLocation().search;
   // console.log(queryParams);
-  const [pageNumber, setPageNumber] = useState(1);
-  const [url, setUrl] = useState(`https://api.jikan.moe/v4/anime${queryParams}&page=${pageNumber}`);
+  const [pageNumber, setPageNumber] = useState(1); 
   const [data, setData] = useState([])
   const [data2,setData2] = useState([])
   // const [data2,setData2] = useState([])
@@ -19,16 +18,14 @@ function Filter() {
     let isCanclled = false;
     setData([]);
     setLoading(true);
-    setUrl(() => {
-      return `https://api.jikan.moe/v4/anime${queryParams}&page=${pageNumber}`;
-    })
+    const url = `https://api.jikan.moe/v4/anime${queryParams}&page=${pageNumber}`;
     const getData = async () => {
       const res = await fetchData2(url)
       setData2(res);
       if (!isCanclled) {
 
         res?.data?.map(async (data1) => {
-          const data2 = await fetchData2(`https://api.enime.moe/mapping/mal/${data1.mal_id}`).then((res) => {
+          await fetchData2(`https://api.enime.moe/mapping/mal/${data1.mal_id}`).then((res) => {
             setLoading(false);
             setData((prevState) => {
               return [...prevState, res]
@@ -44,34 +41,33 @@ function Filter() {
       isCanclled = true
     }
   }, [pageNumber, queryParams])
-  console.log(data)
   return (
     <div>
       <Navbar />
-      <div className="cards">
+      {
+        loading ? (<Loader/>) : (
+          <div className="cards">
 
-        {/* to map the card based on the data  */}
-        {
-          loading ? (<Loader />) : (
-            <>
-              {
-                data != undefined ? (
-                  data.map((res) => {
-                    // console.log('render')
-                    return res?.statusCode != 404 && (
-                      <Card res={res} key={res.id} />
-                    )
-                  })
-                ) : (
-                  <Card res={data} key={data.id} />
-                )
-              }
+          {/* to map the card based on the data  */}
+  
+                {
+                  data != undefined ? (
+                    data.map((res) => {
+                      // console.log('render')
+                      return res?.statusCode != 404 && (
+                        <Card res={res} key={res.id} />
+                      )
+                    })
+                  ) : (
+                    <Card res={data} key={data.id} />
+                  )
+                }
+  
+          {/* <button onClick={handleData}>showData</button> */}
+        </div>
+        )
+      }
 
-            </>
-          )
-        }
-        {/* <button onClick={handleData}>showData</button> */}
-      </div>
       <div>
         <PageNav setPageNumber={setPageNumber} pageNumber={pageNumber} />
       </div>

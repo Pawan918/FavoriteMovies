@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import Navbar from '../../Componenets/Navbar/Navbar'
 import Card from "../../Componenets/Card/Card";
 import PageNav from "../../Componenets/PageNav/PageNav";
@@ -21,27 +21,23 @@ function Home() {
 
 
   // to fetch data on pageNumber change
+  const isCancelled = useRef(false);
   useEffect(() => {
-    let isCancelled = false;
     setLoading(true);
     const getData = async () => {
-      const res = await fetchData(url, pageNumber).then((res) => {
+      await fetchData(url, pageNumber).then((res) => {
         setLoading(false);
         setData(res);
+        // console.log('render')
       });
     }
-    //   if (!isCancelled && res) {
-    //     setLoading(false)
-    //     setData(res);
-    //   }
-    // }
-    // setTimeout(() => {
-    //   setLoading(false);
-    getData();
+    if(!isCancelled.current){
+      getData();
+    }
     // }, 2000)
 
     return () => {
-      isCancelled = true;
+      isCancelled.current = true;
     }
     // console.log(pageNumber);
   }, [pageNumber]);

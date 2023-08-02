@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Navbar from '../../Componenets/Navbar/Navbar'
 import { useParams } from 'react-router-dom';
 import Card from '../../Componenets/Card/Card';
@@ -9,25 +9,28 @@ import Loader from '../../Componenets/Loader/Loader';
 function Search() {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [pageNumber,setPageNumber] = useState(1)
+    const [pageNumber, setPageNumber] = useState(1)
     const params = useParams();
     console.log(params)
     // console.log(params)
-    const url = `https://api.enime.moe/search/${params.name}` 
+    const url = `https://api.enime.moe/search/${params.name}`
+    const isCancelled = useRef(false);
     useEffect(() => {
-        let isCancelled = false;
         setLoading(true);
         const getData = async () => {
-           await fetchData(url, pageNumber).then((res) => {
-            setLoading(false);
-            setData(res);
-          });}
-
-          getData();
-          return () => {
-            isCancelled = true;
-          }
-    },[pageNumber])
+            await fetchData(url, pageNumber).then((res) => {
+                setLoading(false);
+                setData(res);
+                console.log('Search Render')
+            });
+        }
+        if (!isCancelled.current) {
+            getData();
+        }
+        return () => {
+            isCancelled.current = true;
+        }
+    }, [pageNumber])
     return (
         <div>
             <Navbar />
@@ -44,7 +47,7 @@ function Search() {
                                         return <Card res={res} key={res.id} />;
                                     })
                                 ) : (
-                                    <Card res={data} key={data.id}/>
+                                    <Card res={data} key={data.id} />
                                 )
                             }
                         </div>
