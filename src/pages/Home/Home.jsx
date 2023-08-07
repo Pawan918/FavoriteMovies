@@ -21,27 +21,28 @@ function Home() {
 
 
   // to fetch data on pageNumber change
-  const isCancelled = useRef(false);
+  // const isCancelled = useRef(false);
   useEffect(() => {
+    let isCancelled = false
     setLoading(true);
     const getData = async () => {
       await fetchData(url, pageNumber).then((res) => {
         setLoading(false);
         setData(res);
-        // console.log('render')
+        console.log('render')
+        console.log(data);
       });
     }
-    if(!isCancelled.current){
+    if(!isCancelled){
       getData();
     }
     // }, 2000)
 
     return () => {
-      isCancelled.current = true;
+      isCancelled = true;
     }
     // console.log(pageNumber);
   }, [pageNumber]);
-  console.log(data);
   return (
     //  header of the app
     <div className='home'>

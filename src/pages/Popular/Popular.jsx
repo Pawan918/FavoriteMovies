@@ -10,8 +10,8 @@ function Popular() {
   const [loading, setLoading] = useState(false);
   const url = 'https://api.enime.moe/popular';
 
-  const isCancelled = useRef(false);
   useEffect(() => {
+    let isCancelled = false;
     setLoading(true);
     const getData = async () => {
       await fetchData(url, pageNumber).then((res) => {
@@ -20,11 +20,11 @@ function Popular() {
         console.log('popular render')
       });
     }
-    if (!isCancelled.current) {
+    if (!isCancelled) {
       getData();
     }
     return () => {
-      isCancelled.current = true;
+      isCancelled = true;
     }
     // console.log(pageNumber);
   }, [pageNumber, url]);

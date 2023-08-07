@@ -10,8 +10,8 @@ function Newest() {
   const [loading, setLoading] = useState(false);
   const url = 'https://api.enime.moe/recent';
 
-  const isCancelled = useRef(false);
   useEffect(() => {
+    let isCancelled = false;
     setLoading(true);
     const getData = async () => {
       await fetchData(url, pageNumber).then((res) => {
@@ -20,11 +20,11 @@ function Newest() {
         console.log('newest render')
       });
     }
-    if (!isCancelled.current) {
+    if (!isCancelled) {
       getData();
     }
     return () => {
-      isCancelled.current = true;
+      isCancelled = true;
     }
     // console.log(pageNumber);
   }, [pageNumber]);

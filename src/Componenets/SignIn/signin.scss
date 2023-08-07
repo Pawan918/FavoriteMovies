@@ -1,0 +1,74 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    justify-content: center;
+
+    .form-container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 700px;
+        min-height: 400px;
+        background: #000000;
+        /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #434343, #000000);
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #434343, #000000);
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+        .form-toggle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            // position: relative;
+            .tab-group {
+                position: absolute;
+                top: 50px;
+
+                display: flex;
+                list-style: none;
+                font-size: 20px;
+                cursor: pointer;
+                // justify-content: center;
+                align-items: center;
+                padding: 0;
+
+                .toggle-btn {
+                    padding: 5px 20px;
+                    border: 2px solid black;
+                    border-radius: 4px;
+                    color: white;
+                    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+                }
+            }
+        }
+        .field-wrap{
+            display: flex;
+            margin-top: 10px;
+            label{
+                min-width: 150px;
+            }
+        }
+        .signin{
+            display: flex;
+            font-size: 20px;
+
+        }
+    }
+}
+
+.active {
+    background: #8E2DE2;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #4A00E0, #8E2DE2);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #4A00E0, #8E2DE2);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}

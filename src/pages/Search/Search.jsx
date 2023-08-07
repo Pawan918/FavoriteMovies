@@ -14,8 +14,8 @@ function Search() {
     console.log(params)
     // console.log(params)
     const url = `https://api.enime.moe/search/${params.name}`
-    const isCancelled = useRef(false);
     useEffect(() => {
+        let isCancelled = false;
         setLoading(true);
         const getData = async () => {
             await fetchData(url, pageNumber).then((res) => {
@@ -24,11 +24,11 @@ function Search() {
                 console.log('Search Render')
             });
         }
-        if (!isCancelled.current) {
+        if (!isCancelled) {
             getData();
         }
         return () => {
-            isCancelled.current = true;
+            isCancelled = true;
         }
     }, [pageNumber])
     return (
