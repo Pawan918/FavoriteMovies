@@ -21,39 +21,22 @@
         /* Chrome 10-25, Safari 5.1-6 */
         background: linear-gradient(to right, #434343, #000000);
         /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-        .form-toggle {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            // position: relative;
-            .tab-group {
-                position: absolute;
-                top: 50px;
-
-                display: flex;
-                list-style: none;
-                font-size: 20px;
-                cursor: pointer;
-                // justify-content: center;
-                align-items: center;
-                padding: 0;
-
-                .toggle-btn {
-                    padding: 5px 20px;
-                    border: 2px solid black;
-                    border-radius: 4px;
-                    color: white;
-                    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-                }
-            }
-        }
         .field-wrap{
             display: flex;
             margin-top: 10px;
             label{
+                color: #6d6d6d;
                 min-width: 150px;
+            }
+            input{
+                outline: none;
+                height: 32.5px;
+                border-radius: 10px;
+                border-style: none;
+                caret-color: #000000;
+                &::placeholder{
+                    padding-left: 5px;
+                }
             }
         }
         .signin{
@@ -61,8 +44,34 @@
             font-size: 20px;
 
         }
+        .login{
+            display: flex;
+            font-size: 20px;
+        }
     }
 }
+.submit{
+    display: grid;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    min-width: 130px;
+    height: 40px;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border-radius: 20px;
+    border: 2px solid #212529;
+    background: #212529;
+    &:hover{
+        background: #fff;
+        color: #212529
+      }
+    }
 
 .active {
     background: #8E2DE2;

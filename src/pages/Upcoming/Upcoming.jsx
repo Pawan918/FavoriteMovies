@@ -15,12 +15,13 @@ function Upcoming() {
             const res = await fetchData2('https://api.jikan.moe/v4/seasons/upcoming?limit=20');
             if (!isCanclled) {
                 res?.data?.map(async (data1) => {
-                    const data2 = await fetchData2(`https://api.enime.moe/mapping/mal/${data1.mal_id}`).then((res) => {
-                        // const newData = {...res,newtrailer:data1.trailer};
+                    await fetchData2(`https://api.enime.moe/mapping/mal/${data1.mal_id}`).then((res) => {
+                        let newData = {...res,trailer:data1.trailer};
                         // console.log(newData)
-                        setLoading(true);
+                        setLoading(false);
                         setData((prevState) => {
-                            return [...prevState, res]
+                            // console.log(newData)
+                            return [...prevState, newData]
                         })
                     })
                     // setTimeout(()=>{

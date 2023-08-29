@@ -7,48 +7,47 @@ function Card(props) {
   // to respond to hovering over the card
   const [isHovering, setIsHovering] = useState(false);
   // to know if the card is not outside the width of screen
-  const [isOutside,setIsOutsied] = useState(false)
+  const [isOutside, setIsOutsied] = useState(false)
 
   // to know mouse hovering
-  const handleMouseOver = (e)=>{
+  const handleMouseOver = (e) => {
     setIsHovering(true);
   }
 
   // to handle move hovering
-  const handleMouseOut = ()=>{
+  const handleMouseOut = () => {
     setIsHovering(false)
   }
-
-  const myref = (e)=>{
-    if(e !== null){
-      if(isHovering){
+  // console.log(props?.trailer);
+  const myref = (e) => {
+    if (e !== null) {
+      if (isHovering) {
         const x = e.getBoundingClientRect().right;
         const width = x + 400;
-        if(width > window.innerWidth){
+        if (width > window.innerWidth) {
           setIsOutsied(true);
-        }else{
+        } else {
           setIsOutsied(false);
         }
       }
     }
   }
-  let res ;
-  if(props.res.anime !== undefined){
+  let res;
+  if (props.res.anime !== undefined) {
     res = props.res.anime;
-  }else{
+  } else {
     res = props.res;
   }
-  // console.log(res)
   return (
-    <Link to={`/anime/${res.slug}/${res.currentEpisode}`} className='cards-link'>
-    <div className='card' onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} ref={myref} >
-      <CardMain res={res}/>
-      {isHovering &&(
-        <CardSide res={res} isOutside = {isOutside}/>
+    <Link to={`/anime/${res.slug}/${res.currentEpisode || 'trailer'}`} state={{ trailer: res.trailer }} className='cards-link'>
+      <div className='card' onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} ref={myref} >
+        <CardMain res={res} />
+        {isHovering && (
+          <CardSide res={res} isOutside={isOutside} />
         )
-      }
-    </div>
-      </Link>
+        }
+      </div>
+    </Link>
   )
 }
 

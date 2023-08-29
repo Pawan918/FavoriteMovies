@@ -3,7 +3,6 @@ import Navbar from '../../Componenets/Navbar/Navbar'
 import { useLocation, useParams, useSearchParams } from 'react-router-dom'
 import ReactPlayer from 'react-player'
 import { fetchData2 } from './../../utilities/fetchData'
-// import { useLocation } from 'react-router-dom'
 import './anime.scss'
 import Aside from './Aside/Aside'
 import { titleCase } from '../../utilities/titleCase'
@@ -11,7 +10,10 @@ import { truncateString } from '../../utilities/truncate'
 import HoverRating from '../../utilities/HoverRating'
 import { Link } from 'react-router-dom'
 import Loader from '../../Componenets/Loader/Loader'
-function Anime() {
+import Season from './Seasons/Season'
+function Anime(props) {
+  const location = useLocation();
+  // console.log(location)
   const params = useParams();
   const [hasError,setHasError] = useState(false);
   // to get the data of the anime
@@ -20,12 +22,14 @@ function Anime() {
   const [data2, setData2] = useState([]);
   // to set the currentEpisode of the data
   const [data3, setData3] = useState([]);
-  const [episode, setEpisode] = useState(params.ep);
-
+  
   const [loading, setLoading] = useState(false);
-
-  // to set the url of the data
-  const [url, setUrl] = useState(`https://api.enime.moe/view/${params.name}/${episode}`);
+  // if the episode is not released
+  // if(params.ep != 'trailer'){
+    const [episode, setEpisode] = useState(params.ep);
+    // to set the url of the data
+    const [url, setUrl] = useState(`https://api.enime.moe/view/${params.name}/${episode}`);
+  // }
 
   // to set the episode limit max 100 acc to current episode
   const [episodeLimit, setEpisodeLimit] = useState(0);
@@ -35,6 +39,7 @@ function Anime() {
 
   // to change the dropdown value 
   const [dropdownValue, setDropdownValue] = useState("");
+  // const trailer = location.state.trailer?.url;
 
   useEffect(() => {
     let isCancelled = false;
@@ -52,7 +57,7 @@ function Anime() {
           // init of the episode length
           setEpisodeLength(Math.floor(res?.anime?.episodes.length / 100));
           setDropdownValue(`${Math.floor(res?.number / 100) * 100}`);
-          console.log(res);
+          // console.log(res);
         if (res) {
           const res2 = await fetchData2(`https://api.enime.moe/source/${res?.sources?.[0].id}`)
           setData2(res2);
@@ -71,7 +76,7 @@ function Anime() {
       isCancelled = true;
     }
   }, [url])
-  console.log(data)
+  // console.log(data)
   // btn to handle when episode is changed
   const btnHandler = (res) => {
     setUrl(`https://api.enime.moe/view/${res.animeId}/${res.number}`)
@@ -93,8 +98,10 @@ function Anime() {
           {(data != undefined) ? (<>
             <div className="main-video">
               <ReactPlayer className="react-player"
-                light={<img src={data?.anime?.bannerImage || data?.anime?.coverImage} />}
-                url={data2?.url} controls={true}
+                light={<img src={data3?.bannerImage || data3?.coverImage} />}
+                url={data2?.url 
+                  // || trailer
+                  } controls={true}
                 width='100%'
                 height='100%'
               />
@@ -121,7 +128,7 @@ function Anime() {
                         <Link to={`/anime/${params.name}/${data.number}`} key={data.id}>
                           <button res={data} key={data.id}
                             onClick={() => { btnHandler(data) }}
-                            className={`btn ${episode == i + 1 ? ' active' : ''}`}>{i + 1}
+                            className={`btn ${episode == i + 1 ? ' btn-active' : ''}`}>{i + 1}
                           </button>
                         </Link>
                       ))
@@ -132,13 +139,14 @@ function Anime() {
                 }
               </div>
             </div>
+            <div><Season malId = {data?.anime?.mappings?.mal}/></div>
             <div className="main-info">
               <div className="info-image">
-                <img src={data?.anime?.coverImage} alt="" />
+                <img src={data3?.coverImage} alt="" />
               </div>
               <div className="info-about">
                 <div className="info-about__name">
-                  {titleCase(data?.anime?.slug)?.toUpperCase()}
+                  {titleCase(data3?.slug)?.toUpperCase()}
                 </div>
                 <div className='main-detail'>
                   <div className="main-detail__header">
@@ -152,7 +160,7 @@ function Anime() {
                       HD
                     </div>
                     <div className="currentEpisode">
-                      {params.ep}
+                      {data3?.currentEpisode}
                     </div>
                   </div>
                   <div className="info-about__disc">

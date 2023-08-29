@@ -1,4 +1,4 @@
-import React, { useReducer, useState, useRef } from 'react'
+import React, { useReducer, useState, useRef, useEffect } from 'react'
 import './navbar.scss'
 // import SearchIcon from '@mui/icons-material/Search';
 import { titleCase2 } from '../../utilities/titleCase';
@@ -19,6 +19,8 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import { Link, useNavigate } from 'react-router-dom';
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
+import { useCookies } from "react-cookie";
+import axios from 'axios';
 
 const navItems = [
   "GENRES",
@@ -60,6 +62,9 @@ const typeOptions = [
 
 function Navbar(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [cookies,removeCookie] = useState([]);
+  const [signed,setSigned]  = useState(false)
+  const [username,setUsername] = useState('')
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
   const handleClick = (event) => {
@@ -146,6 +151,37 @@ function Navbar(props) {
   const typeHandle = (value)=>{
     navigate(`/filter?type=${value}`)
   }
+
+  useEffect(()=>{
+    const verifyCookie = async()=>{
+      if(!cookies.token){
+        setSigned(false)
+        console.log('hello')}
+        const { data } = await axios(
+          {
+            method: 'post',
+            url: "http://localhost:4000",
+            withCredentials: true,
+            mode: 'no-cors',
+          }
+        );
+        const { status, user } = data;
+        console.log(status,user)
+        setUsername(user);
+        setSigned(status);
+        console.log(status)
+        // return status
+        //   ? toast(`Hello ${user}`, {
+        //       position: "top-right",
+        //     })
+        //   : (removeCookie("token"), navigate("/login"));
+    }
+    verifyCookie();
+  },[cookies,navigate,removeCookie])
+  const Logout = () => {
+    removeCookie("token");
+    navigate("/signup");
+  };
   return (
     <>
       <div className="header">
@@ -240,7 +276,7 @@ function Navbar(props) {
               </Box>
               <div className='login'>
                 <AccountCircleRoundedIcon className='login-icon' />
-                <div className='login-name'>Sign In</div>
+                <div className='login-name'>{signed ? username : "SignIn"}</div>
               </div>
             </Toolbar>
           </AppBar>
