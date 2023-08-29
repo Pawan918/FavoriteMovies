@@ -274,7 +274,7 @@ function Navbar(props) {
                   )
                 }
               </Box>
-              <div className='login'>
+              <div className='login' onClick={()=> !signed ?navigate('/signup') : ''}>
                 <AccountCircleRoundedIcon className='login-icon' />
                 <div className='login-name'>{signed ? username : "SignIn"}</div>
               </div>
